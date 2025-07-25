@@ -1,16 +1,11 @@
 import { useMessage } from "./components/message_box/useMessage.ts";
-import { useEffect } from "react";
+import {  useState, type ChangeEvent } from "react";
 import "./App.css";
-import { load } from "./utility.ts";
+ 
 function App() {
+  const [color, setColor] = useState<string>('#fff')
   const { showMessage, showConfirm } = useMessage();
-  // const [count, setCount] = useState(0)
-  useEffect(() => {
-    return () => {
-      console.log("exit");
-      load();
-    };
-  }, []);
+
 
   const addToDatabase =  async () => {
     
@@ -20,8 +15,43 @@ function App() {
   }
   return (
     <>
-      <div id="appRoot">
-        <div id="showColor">color name</div>
+       <div
+      style={{
+        backgroundColor: "#959595",
+        padding: "20px",
+        display: "grid",
+        gap: "20px",
+        minHeight: "100vh",
+      }}
+    >
+      <input
+        type="text"
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setColor('#' + e.target.value)}
+        style={{
+          fontSize: "20px",
+          padding: "10px",
+          borderRadius: "10px",
+        }}
+        placeholder= 'color name'
+      />
+
+      <div
+        style={{
+          backgroundColor: color|| "#abb",
+          width: "300px",
+          height: "300px",
+          borderRadius: "10px",
+          display: "grid",
+          alignContent: "center",
+          color: "white",
+          fontWeight: "bold",
+          fontSize: "20px",
+          border: "2px solid green",
+          textAlign: "center",
+        }}
+      >
+        
+        {color}</div>
 
         <button
           onClick={async () => await showMessage('Success', "ثبت بkdfjal;skdjfl;kasdjfl;kjasdfl;kjasl;kfjasl;dkfl;asdkfjl;asdkjf;lkjs;lkjf;lksajdfl;kasjdf;lkjا موفقیت انجام شد!")}
